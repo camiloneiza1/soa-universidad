@@ -1,5 +1,6 @@
-package co.edu.ucentral.app.servicio.intentoEvaluacion;
+package co.edu.ucentral.app.servicio.intentoEvaluacion.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -7,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -57,5 +59,17 @@ public class EvaluacionIntentoController extends CommonController<EvaluacionInte
 		EvaluacionIntento evaluacionIntentoBd = optional.get();
 		evaluacionIntentoBd.removerPregunta(respuestaPregunta);
 		return ResponseEntity.status(HttpStatus.CREATED).body(service.save(evaluacionIntentoBd));
+	}
+	
+	@GetMapping("/evaluacionesGrupo/{id}")
+	public ResponseEntity<?> buscarEvaluacionesGrupo(@PathVariable Long id){
+		List<EvaluacionIntento> lista = service.buscarEvaluacionGrupo(id);
+		return ResponseEntity.ok(lista);
+	}
+	
+	@GetMapping("/evaluacionesEstudiante/{id}")
+	public ResponseEntity<?> buscarEvaluacionesEstudiante(@PathVariable Long id){
+		List<EvaluacionIntento> lista = service.buscarEvaluacionEstudiante(id);
+		return ResponseEntity.ok(lista);
 	}
 }

@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -58,5 +59,13 @@ public class GrupoController extends CommonController<Grupo, GrupoService> {
 		Grupo grupoBd = optional.get();
 		grupoBd.removeEstudiante(estudianteGrupo);
 		return ResponseEntity.status(HttpStatus.CREATED).body(service.save(grupoBd));
+	}
+	
+	@GetMapping("/estadisticaGrupo/{id}")
+	public ResponseEntity<?> buscarEstadisticaGrupo(@PathVariable Long id){
+		
+		Optional<Object[]> data = service.buscarEstadisticaGrupo(id);
+		
+		return ResponseEntity.ok(data);
 	}
 }
