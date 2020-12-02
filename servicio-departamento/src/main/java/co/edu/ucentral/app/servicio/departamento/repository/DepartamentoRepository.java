@@ -1,9 +1,9 @@
 package co.edu.ucentral.app.servicio.departamento.repository;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 import co.edu.ucentral.common.departamento.model.Departamento;
 
-public interface DepartamentoRepository extends CrudRepository<Departamento, Long> {
+public interface DepartamentoRepository extends PagingAndSortingRepository<Departamento, Long> {
 
 }
